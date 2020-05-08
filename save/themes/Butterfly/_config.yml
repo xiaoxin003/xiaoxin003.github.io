@@ -9,11 +9,11 @@ menu:
   Archives: /archives/ || fa fa-archive
   Tags: /tags/ || fa fa-tags
   Categories: /categories/ || fa fa-folder-open
-  Link: /link/ || fa fa-link
-  About: /about/ || fa fa-heart
-  List||fa fa-list:
-    - Music || /music/ || fa fa-music
-    - Movie || /movies/ || fa fa-film
+  # Link: /link/ || fa fa-link
+  # About: /about/ || fa fa-heart
+  # List||fa fa-list:
+    # - Music || /music/ || fa fa-music
+    # - Movie || /movies/ || fa fa-film
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -48,9 +48,9 @@ copy:
 #   icon: link || the description
 # ---------------
 social:
-  fa fa-github: https://github.com/jerryc127 || Github
-  fa fa-envelope: mailto:xxxxxxx@gmail.com || Email
-  fa fa-rss: /atom.xml || RSS
+  fa fa-github: https://github.com/xiaoxin003 || Github
+  fa fa-envelope: mailto:452305696@qq.com || Email
+  # fa fa-rss: /atom.xml || RSS
 
 ####    search    ####
 # Algolia search
