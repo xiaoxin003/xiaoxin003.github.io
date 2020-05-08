@@ -1,3 +1,7 @@
+---
+tags:
+  - JavaScript
+---
 ## 概述
 
 ### DOM
