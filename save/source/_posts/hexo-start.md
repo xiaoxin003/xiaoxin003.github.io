@@ -7,6 +7,9 @@ tags:
 ---
 [hexo文档](https://hexo.io/zh-cn/docs/)
 
+基于[Nunjucks](https://github.com/mozilla/nunjucks)模板引擎
+- 如何从根本解决hexo不兼容{{}}标签问题 [ Keep Coding ]
+  + https://www.dazhuanlan.com/2020/01/30/5e322259a87e5/
 
 
 ## 搭建个人博客

@@ -4,7 +4,7 @@
 
 # Site
 title: Cheers's blog
-subtitle: ''
+subtitle: 'Study Notes'
 description: 'learn a little day by day'
 keywords: learn
 author: Cheers
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://xiaoxin003.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -77,7 +77,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+use_date_for_updated: true
 
 # Pagination
 ## Set per_page to 0 to disable pagination
