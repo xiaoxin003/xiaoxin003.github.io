@@ -98,6 +98,9 @@ theme: Butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: https://github.com/xiaoxin003/xiaoxin003.github.io.git
-  branch: master
+  - type: git
+    repo: https://gitee.com/xiaoxin1993/blog
+    branch: master
+  - type: git
+    repo: https://github.com/xiaoxin003/xiaoxin003.github.io.git
+    branch: master
