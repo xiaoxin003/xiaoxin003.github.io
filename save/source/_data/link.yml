@@ -1,0 +1,33 @@
+class:
+  class_name: 链接
+  link_list:
+    1:
+      name: Vue文档
+      link: https://cn.vuejs.org/v2/guide/
+      avatar: /img/avatar_img.jpg
+      descr: Vue 2.0文档
+    2:
+      name: Vue-CLI服务
+      link: https://cli.vuejs.org/zh/guide/cli-service.html
+      avatar: /img/avatar_img.jpg
+      descr: CLI服务文档
+    3:
+      name: Element
+      link: https://element.eleme.cn/#/zh-CN/component/message
+      avatar: /img/avatar_img.jpg
+      descr: Element文档
+    4:
+      name: Vue3.0
+      link: https://composition-api.vuejs.org/#summary
+      avatar: /img/avatar_img.jpg
+      descr: Vue Composition API
+    5:
+      name: Vue3.0
+      link: https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api/
+      avatar: /img/avatar_img.jpg
+      descr: why composition
+    6:
+      name: Vue3.0
+      link: https://github.com/JackySoft/vue3.0-demo
+      avatar: /img/avatar_img.jpg
+      descr: vue3.0-demo

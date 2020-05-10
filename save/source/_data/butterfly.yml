@@ -18,14 +18,14 @@ menu:
 # PWA
 # See https://github.com/JLHwung/hexo-offline
 # ---------------
-# pwa:
-#   enable: true
-#   manifest: /img/pwa/manifest.json
-#   theme_color: "#fff"
-#   apple_touch_icon: /img/pwa/apple-touch-icon.png
-#   favicon_32_32: /img/pwa/32.png
-#   favicon_16_16: /img/pwa/16.png
-#   mask_icon: /img/pwa/safari-pinned-tab.svg
+pwa:
+  enable: true
+  manifest: /img/pwa/manifest.json
+  theme_color: "#fff"
+  apple_touch_icon: /img/pwa/apple-touch-icon.png
+  favicon_32_32: /img/pwa/32.png
+  favicon_16_16: /img/pwa/16.png
+  mask_icon: /img/pwa/safari-pinned-tab.svg
 
 # Highlight theme
 # ---------------
@@ -56,7 +56,7 @@ social:
 # Algolia search
 # ---------------
 algolia_search:
-  enable: false
+  enable: true
   hits:
     per_page: 6
 
@@ -202,7 +202,8 @@ addThis:
 
 sharejs:
   enable: true
-  sites: facebook,twitter,wechat,weibo,qq
+  # sites: facebook,twitter,wechat,weibo,qq
+  sites: wechat,weibo,qq
 
 # https://www.addtoany.com/
 addtoany:
@@ -373,7 +374,7 @@ related_post:
 
 # figcaption
 # 圖片描述文字
-photofigcaption: false
+photofigcaption: true
 
 # anchor
 # when you scroll in post, the url will update according to header id.
@@ -467,7 +468,7 @@ click_heart:
 
 # 點擊出現文字，文字可自行修改
 ClickShowText:
-  enable: true
+  enable: false
   text:
     - 努力
     - 努力
@@ -527,8 +528,8 @@ subtitle:
   # (如果有英文逗號' , '，請使用轉義字符 &#44;)
   # 如果關閉打字效果，subtitle只會顯示sub的第一行文字
   sub:
-    - 今日事&#44;今日畢
-    - Never put off till tomorrow what you can do today
+    # - 今日事&#44;今日毕
+    - 努力&#44;努力&#44;再努力X
 
 # fontawesome圖標
 # 默認使用的是 fontawesome v4版本的圖標
@@ -625,18 +626,18 @@ darkmode:
 #--------------------------------------------
 # medium_zoom https://github.com/francoischalifour/medium-zoom
 medium_zoom:
-  enable: false
+  enable: true
 
 # fancybox http://fancyapps.com/fancybox/3/
 fancybox:
-  enable: true
+  enable: false
 
 # Snackbar 彈窗
 # https://github.com/polonel/SnackBar
 # position 彈窗位置
 # 可選 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
-  enable: false
+  enable: true
   position: bottom-left
   bg_light: '#49b1f5' #light mode時彈窗背景
   bg_dark: '#2d3035' #dark mode時彈窗背景
@@ -772,3 +773,5 @@ CDN:
 
   # 簡繁轉換
   translate: /js/tw_cn.js
+
+

@@ -26,7 +26,7 @@ server.listen(3000,function(){
 })
 ```
 
-![截屏2020-04-09下午3.49.28](/Users/yongxinyuan/Library/Application Support/typora-user-images/截屏2020-04-09下午3.49.28.png)
+![服务运行成功](https://gitee.com/xiaoxin1993/imgs/raw/master/blog/posts/content/http.png)
 
 ```javascript
 //request请求事件处理函数，需要接收两个参数
