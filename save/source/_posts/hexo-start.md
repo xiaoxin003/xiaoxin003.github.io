@@ -171,7 +171,8 @@ tags:
 - 根据butterfly的文档一步步进行安装
 - 将站点的_config.yml的theme更改为Butterfly，即可
 
-## Hexo+Butterfly集成Algolia搜索（支持github。gitee支持不好）
+## Hexo+Butterfly集成Algolia搜索
+**? 在github站点和gitee站点，搜索时，gitee搜索，点击会跳转到github的站点上。还未找到原因**
 - 注册Algolia账户：https://www.algolia.com/
 - 创建index，之后，在站点根目录，指令命令`npm install hexo-algolia --save`
 - 获取Key，更新站点根目录配置
