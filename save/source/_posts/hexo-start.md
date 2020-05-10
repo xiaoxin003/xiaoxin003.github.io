@@ -172,7 +172,7 @@ tags:
 - 将站点的_config.yml的theme更改为Butterfly，即可
 
 ## Hexo+Butterfly集成Algolia搜索
-**? 在github站点和gitee站点，搜索时，gitee搜索，点击会跳转到github的站点上。还未找到原因**
+根据站点的配置文件中配置的站点的url去搜索：由于Github是国外服务器，速度慢。所以站点配置的是Gitee码云
 - 注册Algolia账户：https://www.algolia.com/
 - 创建index，之后，在站点根目录，指令命令`npm install hexo-algolia --save`
 - 获取Key，更新站点根目录配置
@@ -190,6 +190,7 @@ tags:
   set (Mac和git bash 为 export) (Powershell 用 $env:) HEXO_ALGOLIA_INDEXING_KEY 
   
   #查看是否设置成功如果没有值就设置失败
+  export HEXO_ALGOLIA_INDEXING_KEY=ad8621998734521248772996b97271f7
   hexo algolia
   ```
 - 成功后修改Butterfly主题配置文件
