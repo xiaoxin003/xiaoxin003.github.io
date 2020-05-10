@@ -25,7 +25,7 @@ pwa:
   apple_touch_icon: /img/pwa/apple-touch-icon.png
   favicon_32_32: /img/pwa/32.png
   favicon_16_16: /img/pwa/16.png
-  mask_icon: /img/pwa/safari-pinned-tab.svg
+  # mask_icon: /img/pwa/safari-pinned-tab.svg
 
 # Highlight theme
 # ---------------
