@@ -20,7 +20,7 @@ menu:
 # ---------------
 pwa:
   enable: true
-  manifest: /img/pwa/manifest.json
+  manifest: /manifest.json
   theme_color: "#fff"
   apple_touch_icon: /img/pwa/apple-touch-icon.png
   favicon_32_32: /img/pwa/32.png
