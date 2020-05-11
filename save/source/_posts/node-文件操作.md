@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, notes, fs]
 tags:
   - Node.js
-  - node-fs
 ---
 # 读取文件
 

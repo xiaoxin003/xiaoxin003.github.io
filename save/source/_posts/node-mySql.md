@@ -1,10 +1,8 @@
 ---
 categories:
-  - Node.js
-    - notes
+  - [Node.js, notes, mySql]
 tags:
   - Node.js
-  - mySql-node
 ---
 ## 使用Node操作MySQL数据库
 

@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, 起步]
 tags:
   - Node.js
-  - Node.js起步
 ---
 # 起步
 

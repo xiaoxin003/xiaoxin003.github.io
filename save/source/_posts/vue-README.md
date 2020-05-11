@@ -1,9 +1,9 @@
 ---
 categories:
-  - VUE
-    - VUE 2
+  - [VUE, VUE 2, 准备]
 tags:
   - VUE
+  - VUE 2
 ---
 ## 单页面应用程序
 

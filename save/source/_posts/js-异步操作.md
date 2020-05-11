@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, notes, 异步操作]
 tags:
   - JavaScript
 ---

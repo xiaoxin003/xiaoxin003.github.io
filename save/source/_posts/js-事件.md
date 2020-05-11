@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, notes, 事件]
 tags:
   - JavaScript
 ---

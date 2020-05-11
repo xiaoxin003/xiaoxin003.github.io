@@ -1,8 +1,7 @@
 ---
 title: Hello World
 categories:
-  - HEXO
-    - hello world
+  - [HEXO, hello world]
 tags: 
   - hello
   - world

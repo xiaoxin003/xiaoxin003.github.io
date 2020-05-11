@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, notes, DOM]
 tags:
   - JavaScript
 ---

@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, notes, node-Apache应用]
 tags:
   - Node.js
-  - node-Apache应用
 ---
 - 如何得到wwwDir目录列表中的文件名和目录名
   - fs.readdir

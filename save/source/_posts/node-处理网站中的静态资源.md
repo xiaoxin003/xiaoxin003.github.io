@@ -1,7 +1,6 @@
 ---
 categories:
-  - Node.js
-    - notes
+  - [Node.js, notes, 处理网站中的静态资源]
 tags:
   - Node.js
 ---

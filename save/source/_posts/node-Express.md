@@ -1,7 +1,6 @@
 ---
 categories:
-  - Node.js
-    - notes
+  - [Node.js, notes, Express]
 tags:
   - Node.js
 ---

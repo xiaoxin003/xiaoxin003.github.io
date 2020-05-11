@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, notes, Node.js应用]
 tags:
   - Node.js
-  - Node.js应用
 ---
 ## 目录结构
 

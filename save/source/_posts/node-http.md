@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, notes, http]
 tags:
   - Node.js
-  - node-http
 ---
 ## 使用node轻松构建web服务器
 

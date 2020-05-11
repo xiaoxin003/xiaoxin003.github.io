@@ -1,7 +1,6 @@
 ---
 categories:
-  - HEXO
-    - START
+  - [HEXO, START]
 tags:
   - HEXO
 ---
@@ -235,8 +234,14 @@ tags:
         "type": "image/png"
       }
     ]
-  }
-```
+    }
+   ```
+  ```
+
+  ```
 6. 可以通过Chrome插件Lighthouse检查PWA配置是否生效以及配置是否正确
   - 下载的扩展插件crx文件，更改为rar文件，再解压
   - 在chrome://extensions中导入解压文件
+```
+
+```

@@ -1,7 +1,6 @@
 ---
 categories:
-  - Node.js
-    - notes
+  - [Node.js, notes, 模块系统]
 tags:
   - Node.js
 ---

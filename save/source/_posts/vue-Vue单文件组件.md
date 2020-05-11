@@ -1,9 +1,9 @@
 ---
 categories:
-  - VUE
-    - VUE 2
+  - [VUE, VUE 2, notes, 单文件组件]
 tags:
   - VUE
+  - VUE 2
 ---
 ## 传统组件的问题和解决方案
 

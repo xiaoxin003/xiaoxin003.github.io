@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, 准备]
 tags:
   - JavaScript
 ---

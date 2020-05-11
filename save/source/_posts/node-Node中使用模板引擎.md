@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, notes, Node模板引擎]
 tags:
   - Node.js
-  - Node模板引擎
 ---
 ## 基于art-template的模板引擎
 

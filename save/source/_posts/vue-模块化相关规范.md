@@ -1,9 +1,9 @@
 ---
 categories:
-  - VUE
-    - VUE 2
+  - [VUE, VUE 2, notes, 模块化相关规范]
 tags:
   - VUE
+  - VUE 2
 ---
 ## 模块化概述
 

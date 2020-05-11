@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript,notes,标准库]
 tags:
   - JavaScript
 ---

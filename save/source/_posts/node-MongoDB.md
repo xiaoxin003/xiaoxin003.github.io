@@ -1,10 +1,8 @@
 ---
 categories:
-  - Node.js
-    - notes
+  - [Node.js, notes, MongoDB]
 tags:
   - Node.js
-  - MongoDB-node
 ---
 ## 关系型数据库和非关系型数据库
 

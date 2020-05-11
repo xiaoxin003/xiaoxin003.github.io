@@ -1,9 +1,9 @@
 ---
 categories:
-  - VUE
-    - VUE 2
+  - [VUE, VUE 2, notes, 脚手架]
 tags:
   - VUE
+  - VUE 2
 ---
 ## 基本用法
 

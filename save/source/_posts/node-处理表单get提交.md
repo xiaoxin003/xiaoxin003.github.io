@@ -1,7 +1,6 @@
 ---
 categories:
-  - Node.js
-    - notes
+  - [Node.js, notes, 处理表单get提交]
 tags:
   - Node.js
 ---

@@ -1,9 +1,9 @@
 ---
 categories:
-  - VUE
-    - VUE 3
+  - [VUE, VUE 3, 准备]
 tags:
   - VUE
+  - VUE 3
 ---
 3.x目录
 

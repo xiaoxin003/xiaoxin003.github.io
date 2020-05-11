@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, notes, 语法专题]
 tags:
   - JavaScript
 ---

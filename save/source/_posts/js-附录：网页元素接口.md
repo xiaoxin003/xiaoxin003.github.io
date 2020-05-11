@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, notes, 网页元素接口]
 tags:
   - JavaScript
 ---

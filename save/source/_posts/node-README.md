@@ -1,9 +1,8 @@
 ---
 categories:
-  - Node.js
+  - [Node.js, 准备]
 tags:
   - Node.js
-  - Node.js准备
 ---
 #为什么要学习Node.js
 

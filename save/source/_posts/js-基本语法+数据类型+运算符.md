@@ -1,4 +1,6 @@
 ---
+categories:
+  - [JavaScript, notes, 基本语法、数据类型、运算符]
 tags:
   - JavaScript
 ---

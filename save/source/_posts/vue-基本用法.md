@@ -1,9 +1,9 @@
 ---
 categories:
-  - VUE
-    - VUE 2
+  - [VUE, VUE 2, notes, 基本用法]
 tags:
   - VUE
+  - VUE 2
 ---
 ## 事件
 

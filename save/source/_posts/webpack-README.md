@@ -1,7 +1,6 @@
 ---
 categories:
-  - webpack
-    - README
+  - [webpack, README]
 tags: 
   - webpack
 ---
