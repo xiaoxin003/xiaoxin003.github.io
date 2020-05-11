@@ -217,7 +217,7 @@ tags:
           origin: your_websie_url # 可替換成你的 url
   ```
 4. 在`butterfly.yml`（站点的source/_data/butterfly.yml）中开启pwa选项,enable设置为true
-5. 在manifest对应的路径下创建manifest.json
+5. 在站点的根目录下的source下创建manifest.json（hexo-offline自动生成service worker.js）
    ```
    {
     "name": "string",
