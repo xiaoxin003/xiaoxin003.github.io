@@ -6,7 +6,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 2,
   "icons": [{
       "src": "img/pwa/pwaicons/36.png",
