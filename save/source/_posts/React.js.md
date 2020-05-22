@@ -84,10 +84,10 @@ tags:
   - 4.x中新增了mode选项（必选项）development/production
 7.`npm i webpack-dev-server -D`运行后，在package.json中的scripts里增加命令，`"dev":"webpack-dev-server`起服务，并且实时更新打包main.js。webpack-dev-server打包好的main.js是托管到了内存中，所以在项目根目录中看不到。可以设置参数，如下：`"dev":"webpack-dev-server --open firefox --port 3000 --hot --progress --compress --host 127.0.0.1`
 8.安装`npm i html-webpack-plugin -D`:帮我们把页面生成到内存中去
-  在webpack.config.js中配置
+    在webpack.config.js中配置
   ``` javascript
   const path = require('path')
-  //导入 在内存中自动生成index.html页面的插件
+  /*导入 在内存中自动生成index.html页面的插件*/
   const HtmlWebPackPlugin = require('html-webpack-plugin')
   //创建一个插件的实例对象
   const htmlPlugin = new HtmlWebPackPlugin({
@@ -104,6 +104,313 @@ tags:
 
 
 
+## 在项目中使用React
+1.运行`npm i react react-dom -S`安装包
+  - react：专门用于创建组件和虚拟DOM的，同时组件的生命周期都在这个包中
+  - react-dom：专门进行DOM操作的，最主要的应用场景就是React.render()
+2.在index.html页面中，创建容器
+  ``` html
+  <!--容器，将来使用React创建的虚拟DOM元素，都会被渲染到这个指定容器中-->
+  <div id="app"></div>
+  ```
+3.导入包：
+  ``` js
+  import React from 'react'
+  import React-dom from 'react-dom'
+  ```
+4.创建虚拟DOM元素：
+  ``` js
+  /*
+  这是创建虚拟DOM元素的API
+  第一个参数：字符串类型的参数，表示创建的标签的名称
+  第二个参数：对象类型的参数，表示创建的元素的属性节点
+  第三个参数：子节点
+  */
+  const h1 = React.createElement('h1', null, 'h1 text')
+const div = React.createElement('div', {
+    title: 'div的titile'
+}, h1)
+  ```
+5.渲染
+  ``` js
+  /*
+  渲染虚拟DOM元素
+  参数1:表示要渲染的虚拟DOM对象
+  参数2:指定容器。注意：这里不能直接放容器元素的id字符串，需要放一个容器的DOM对象
+  */
+  ReactDom.render(div, document.getElementById("app"))
+  ```
+6.React中使用JSX语法
+  - 在JS中，混合写入类似于HTML的语法，叫JSX语法（符合XML规范的JS）
+  - 可以在js文件中，写类似于HTML的标记，然后使用babel来转换这些js中的标签（在js文件中，默认不能写类似于HTML的标记，否则会打包失败）
+  - JSX语法的本质：是在运行的时候，被转换成了React.createElement形式来执行
+
+
+## JSX语法
+### 什么是JSX语法
+就是符合XML规范的JS语法（语法格式相对来说，要比HTML严谨很多）
+### 如何启用JSX语法？
+- 安装babel插件
+  + 运行`npm i babel-core babel-loader babel-plugin-transform-runtime -D`
+  + 运行`npm i babel-preset-env babel-preset-stage-0 -D`
+- 安装能够识别转换jsx语法的包`babel-preset-react`
+  
+  + 运行`npm i babel-preset-react -D`
+- 添加`.babelrc`配置文件
+  ``` 
+  {
+  "presets":["env","stage-0","react"],
+  "plugins":["transform-runtime"]
+  }
+  ```
+- 在webpack.config.js文件中配置babel-loader
+  ``` js
+  const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+//创建一个插件的实例对象
+const htmlPlugin = new HtmlWebpackPlugin({
+    template: path.join(__dirname, 'src/index.html'),
+    filename: 'index.html'
+})
+//向外暴露一个打包的配置对象；因为webpack是基于Node构建的，所以webpack支持Node API和语法
+//webpack默认只能打包处理.js后缀名类型的文件；像.png .vue无法主动处理，所以要配置第三方的loader
+module.exports = {
+    mode: 'development', //development production
+    //在webpack 4.x中，有一个最大的特性，就是约定大于配置。默认打包的入口路径是src->index.js
+    plugins: [
+        htmlPlugin
+    ],
+    module: { //所有第三方模块的配置规则
+        rules: [ //第三方匹配规则
+            {
+                test: /\.js|jsx$/,
+                use: 'babel-loader',
+                exclude: /node_modules/   //必须加入该项，排除node_modules
+            }
+        ]
+    }
+}
+  ```
+### jsx语法的本质
+并不是直接把jsx渲染到页面上，而是内部先转换成了createElement形式再渲染的
+### 在jsx中混合写入js表达式
+需要把js代码写到`{}`中
+- 渲染数字
+- 渲染字符串
+- 渲染布尔值
+- 为属性绑定值
+- 渲染jsx元素
+- 渲染jsx元素数组
+- 将普通字符串数组转为jsx数组并渲染到页面上【两种方案】
+  forEach
+  map
+
+### 在jsx中写注释
+推荐使用`{/*这是注释*/}`
+
+### 为jsx中的元素添加class类名
+需要使用`className`来替代`class`;`htmlFor`替换label的`for`属性
+
+### jsx添加DOM
+在jsx添加DOM的时候，所有的节点，必须有唯一的根元素进行包裹
+
+### jsx标签闭合
+在jsx语法中，标签必须成对出现，如果是单标签，则必须自闭合
+当编译引擎在编译jsx代码的时候，如果遇到了`<`就会把它当作html代码去编译，如果遇到了`{}`就会把花括号内部的代码当作普通js代码去编译
+
+## React中创建组件
+### 第一种-创建组件的方式
+使用构造函数来创建组件：如果要接收外界传递的数据，需要在构造函数的参数列表中使用`props`来接收；必须要向外return一个合法的JSX创建的虚拟DOM
+``` js
+/*创建组件*/
+function Hello(){
+//return null
+return <div>Hello</div>
+}
+/*为组件传递数据*/
+//使用组件并传递props数据
+<Hello name={dog.name} age={dog.age}></Hello>
+//在构造函数中接收外界传递过来的组件（组件中的props是只读的，不能被重新赋值）
+function Hello(props){
+    return (<p title={dog.name} age={dog.age}>123</p>)
+}
+```
+- 父组件向子组件传递数据
+- 使用{...obj}属性扩散传递数据
+- 将组件封装到单独的文件中
+- 注意：组件的名称的首字母必须是大写
+将组件抽离为单独的jsx文件
+``` Hello.jsx
+import React from 'react'//组件需要导入React包
+function Hello(props){
+    return (<p>123{props.name}</p>)
+}
+export default Hello
+```
+
+``` index.js
+//导入Hello组件。默认，如果不做单独的配置的话，不能省略.jsx后缀名
+import Hello from './components/Hello.jsx'
+```
+- 如何省略.jsx后缀名
+配置webpack从而在导入组件的时候，省略.jsx后缀名
+``` webpack.config.js
+module.exports = {
+	resolve:{
+		//表示这几个文件的后缀名，可以省略不写
+		extensions:['.js','.jsx','.json']
+	}
+}
+```
+- 在导入组件的时候，使用`@`路径符号
+配置webpack设置根目录
+``` webpack.config.js
+const path = require('path')
+module.exports = {
+	resolve: {
+        extensions: ['.js', '.jsx', '.json'],
+        //设置别名
+        alias: {
+            '@': path.join(__dirname, './src')
+        }
+
+    }
+}
+```
+
+### 第二种-创建组件的方式
+- class相关知识点
+``` js
+//创建一个动物类
+class Animal {
+    //类中的构造器（实例属性）
+    constructor(title) {
+        this.title = title
+    }
+    //静态属性
+    static info = 'jingtai'
+    //实例方法（加到原型链上的方法）
+    jiao(){
+        console.log('jiao')
+    }
+    //静态方法
+    static show(){
+        console.log('show')
+    }
+}
+/*
+* 注意：
+* 1.在class的{}区间内，只能写构造器、实例方法、静态属性、静态方法
+* 2.class关键字内部，还是用的原来的构造函数实现的。所以说，我们把class关键字称作语法糖
+*/
+```
+### 了解ES6中class关键字的使用
+1.class中constructor的基本使用
+2.使用extends实现子类继承父类
+3.子类访问父类上的实例方法
+4.constructor构造器中super函数的使用说明
+``` js
+class Person{
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+    }
+    sayHi(){
+        return 'Hi'
+    }
+}
+class American extends Person {
+    constructor(name,age){
+        /*
+         * 1.为什么一定要在constructor中调用super
+         *   如果一个子类是通过extends关键字继承了父类，那么在子类的constructor构造函数中，必须先调用一下super()
+         * 2.super是什么
+         *   是一个函数，而且是父类的构造器；子类中的super其实就是父类中构造函数的引用
+         * 3.为什么调用了super()之后，实例的属性会变成undefined
+         *   没给传值，需要传递参数
+         */
+        super(name,age)
+    }
+}
+const a1 = new American('Jack', 23)
+class Chinese extends Person {
+    constructor(name,age,IDNumber){
+        super(name,age)
+        this.IDNumber = IDNumber
+    }
+}
+const c1 = new Chinese('张三', 23,'120xxxxxxx')
+console.log(a1, c1)
+```
+- 使用class关键字来创建组件
+1.最基本的组件结构
+``` js
+//如果要使用class定义组件，必须让自己的组件继承自React.Component
+class 组件名称 extends React.Component{
+  //在组件内部，必须有render函数。作用：渲染当前组件的虚拟DOM结构
+  render(){
+    //render函数中，必须返回合法的JSX虚拟DOM结构
+    return <div>这是class创建的组件</div>
+  }
+}
+```
+2.为class创建的组件传递props并使用
+``` Movie.jsx
+import React from 'react'
+class Movie extends React.Component{
+    render(){
+        //在class关键字创建的组件中，如果想使用外界传递过来的props参数，不需要接收，直接通过this.props.xxx来访问
+    return <div>Movie--{this.props.name}---{this.props.age}</div>
+    }
+}
+export default Movie
+
+//index.js中使用
+ReactDom.render(
+{/*这里的Movie标签，实际就是Movie类的一个实例对象 */}
+    <Movie {...dog}></Movie>, document.getElementById("app"))
+```
+
+3.介绍class创建的组件中this.state
+``` Movie.jsx
+import React from 'react'
+class Movie extends React.Component{
+    constructor(){
+        //由于Movie组件继承了React.component，所以自定义的构造器中，必须调用super()
+        super()
+        //只有调用了super()以后，才能使用this关键字
+        //this.state={}相当于VUE中的data(){return {}}
+        this.state={
+            msg:'大家好'
+        }
+    }
+    
+    render(){
+        this.state.msg = '被修改了'
+        //在class关键字创建的组件中，如果想使用外界传递过来的props参数，不需要接收，直接通过this.props.xxx来访问
+        return (
+            <div>Movie--{this.props.name}---{this.props.age}
+                <p>{this.state.msg}</p>
+            </div>
+        )
+    }
+}
+export default Movie
+```
+4.两种创建组件方式的对比
+注意：使用class关键字创建的组件有自己的私有数据和生命周期函数；但是使用function创建的组件，只有props，没有自己的私有数据和生命周期函数。
+  - 用"构造函数"创建出来的组件叫做“无状态组件”
+  - 用"class关键字"创建出来的组件叫做“有状态组件”
+  - 什么情况下使用有状态组件？什么情况下使用无状态组件？
+    + 如果一个组件需要有自己的私有数据，则推荐使用class创建的有状态组件
+    + 如果一个组件不需要有私有数据，则推荐使用无状态组件
+    + React官方说：无状态组件由于没有自己的state和生命周期函数，所以运行效率会比有状态组件稍微高一些
+有状态组件和无状态组件的本质区别：有无state属性和有无生命周期函数
+  - 组件中的props和state/data之间的区别
+    + props中的数据都是外界传递过来的
+    + state/data中的数据都是组件私有的（通过Ajax获取回来的数据）
+    + props中的数据都是只读的，不能重新赋值
+    + state/data中的数据都是可读可写的
 
 
 
