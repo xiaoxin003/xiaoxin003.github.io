@@ -116,9 +116,10 @@ tags:
 3.导入包：
   ``` js
   import React from 'react'
-  import React-dom from 'react-dom'
+  import ReactDom from 'react-dom'
   ```
 4.创建虚拟DOM元素：
+
   ``` js
   /*
   这是创建虚拟DOM元素的API
@@ -219,6 +220,7 @@ module.exports = {
 当编译引擎在编译jsx代码的时候，如果遇到了`<`就会把它当作html代码去编译，如果遇到了`{}`就会把花括号内部的代码当作普通js代码去编译
 
 ## React中创建组件
+
 ### 第一种-创建组件的方式
 使用构造函数来创建组件：如果要接收外界传递的数据，需要在构造函数的参数列表中使用`props`来接收；必须要向外return一个合法的JSX创建的虚拟DOM
 ``` js
@@ -411,6 +413,99 @@ export default Movie
     + state/data中的数据都是组件私有的（通过Ajax获取回来的数据）
     + props中的数据都是只读的，不能重新赋值
     + state/data中的数据都是可读可写的
+
+
+
+## 在组件中使用style行内样式并封装样式对象
+``` CmtList.jsx
+import React from 'react'
+import CmtItem from '@/components/CmtItem'
+export default class CmtList extends React.Component{
+    constructor(){
+        super()
+        this.state = {
+CommentList:[
+    {
+        id:1,user:'张三',content:'shafa'
+    },
+    {
+        id:2,user:'张四',content:'shafa'
+    }
+]
+        }
+    }
+    render(){
+        {/*在JSX中，如果要写行内样式，不能为style设置字符串的值，而是要写成style={ {color:'red} } 在行内样式中，如果是数值类型的样式，则可以不用引号包裹，如果是字符串类型的样式值，必须使用引号包裹*/}
+        return (<div>
+            <h1 style={ {color:'red',fontSize:'35px',zIndex:3} }>这是评论列表组件</h1>
+        {this.state.CommentList.map(item=><CmtItem key={item.id} {...item}></CmtItem>)}
+        </div>)
+    }
+}
+```
+优化：
+将样式对象抽离出来，组成styles.js文件，导出即可
+
+## 使用css样式表美化组件
+- `npm i style-loader css-loader -D`
+- 配置webpack.config.js（默认webpack打包处理不了css文件，需要在module中的rules配置规则）
+  ``` js
+  const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+//创建一个插件的实例对象
+const htmlPlugin = new HtmlWebpackPlugin({
+    template: path.join(__dirname, 'src/index.html'),
+    filename: 'index.html'
+})
+//向外暴露一个打包的配置对象；因为webpack是基于Node构建的，所以webpack支持Node API和语法
+//webpack默认只能打包处理.js后缀名类型的文件；像.png .vue无法主动处理，所以要配置第三方的loader
+module.exports = {
+    mode: 'development', //development production
+    //在webpack 4.x中，有一个最大的特性，就是约定大于配置。默认打包的入口路径是src->index.js
+    plugins: [
+        htmlPlugin
+    ],
+    module: { //所有第三方模块的配置规则
+        rules: [ //第三方匹配规则
+            {
+                test: /\.js|jsx$/,
+                use: 'babel-loader',
+                exclude: /node_modules/ //必须加入该项，排除node_modules
+            },
+            //打包处理css样式表的第三方loader。处理过程：交给从右往左的use去处理
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'],
+        alias: {
+            '@': path.join(__dirname, './src')
+        }
+
+    }
+}
+  ```
+- 使用
+  + import '@/css/cmtList.css'（引入）
+  + <h1 className="title">这是评论列表组件</h1>（className写上对应的类名）
+
+- 注意： 直接导入css样式表，默认是在全局上，整个项目都生效
+  解决方法：通过modules参数启用模块化（webpack.config.js）
+  ``` webpack.config.js
+  // css模块化只针对类选择器和id选择器生效；不会将标签选择器模块化
+  {
+    test:/\.css$/,
+    use:['style-loader','css-loader?modules']
+  }
+  ```
+  
+  ``` cmtList.jsx
+  import cssobj from '@/css/cmtList.css'
+   <h1 className={cssobj.title}>这是评论列表组件</h1>
+  ```
 
 
 
