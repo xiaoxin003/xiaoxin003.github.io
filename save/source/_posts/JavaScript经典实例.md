@@ -1,3 +1,9 @@
+---
+categories:
+ - [JavaScript]
+tags:
+ - JavaScript
+---
 ## 跨浏览器事件
 ### 跨浏览器添加事件
 ``` js
