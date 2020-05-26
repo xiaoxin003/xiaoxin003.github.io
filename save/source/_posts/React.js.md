@@ -413,9 +413,6 @@ export default Movie
     + state/data中的数据都是组件私有的（通过Ajax获取回来的数据）
     + props中的数据都是只读的，不能重新赋值
     + state/data中的数据都是可读可写的
-
-
-
 ## 在组件中使用style行内样式并封装样式对象
 ``` CmtList.jsx
 import React from 'react'
@@ -424,14 +421,14 @@ export default class CmtList extends React.Component{
     constructor(){
         super()
         this.state = {
-CommentList:[
-    {
-        id:1,user:'张三',content:'shafa'
-    },
-    {
-        id:2,user:'张四',content:'shafa'
-    }
-]
+          CommentList:[
+              {
+                  id:1,user:'张三',content:'shafa'
+              },
+              {
+                  id:2,user:'张四',content:'shafa'
+              }
+          ]
         }
     }
     render(){
@@ -448,6 +445,7 @@ CommentList:[
 
 ## 使用css样式表美化组件
 - `npm i style-loader css-loader -D`
+
 - 配置webpack.config.js（默认webpack打包处理不了css文件，需要在module中的rules配置规则）
   ``` js
   const path = require('path')
@@ -488,24 +486,113 @@ module.exports = {
     }
 }
   ```
+  
 - 使用
   + import '@/css/cmtList.css'（引入）
-  + <h1 className="title">这是评论列表组件</h1>（className写上对应的类名）
+  + `<h1 className="title">这是评论列表组件</h1>`（className写上对应的类名）
 
 - 注意： 直接导入css样式表，默认是在全局上，整个项目都生效
   解决方法：通过modules参数启用模块化（webpack.config.js）
+  
+  启动css-modules
+  [webpack官方文档](https://www.webpackjs.com/)
+  
   ``` webpack.config.js
   // css模块化只针对类选择器和id选择器生效；不会将标签选择器模块化
   {
     test:/\.css$/,
+    //为.css后缀名的样式表启用CSS模块化
     use:['style-loader','css-loader?modules']
   }
   ```
   
   ``` cmtList.jsx
+  //在需要的组件中，import导入样式表，并接收模块化的CSS样式对象
   import cssobj from '@/css/cmtList.css'
+  //在需要的HTML标签上，使用className指定模块化的样式
    <h1 className={cssobj.title}>这是评论列表组件</h1>
   ```
+- 使用`localIdentName`自定义生成的类名格式，可选的参数有：
+  + [path]表示样式表相对于项目根目录所在路径
+  + [name]表示样式表文件名称
+  + [local]表示样式的类名定义名称
+  + [hash:length]表示32位的hash值
+  + 例子：`{test:/\.css$/,use:['style-loader','css-loader?modules&localIdentName=[path][name]-[local]-[hash:5]']}`
+- 使用`:local()`和`:global()`
+  + `:local()`包裹的类名，是被模块化的类名，只能通过`className={cssObj.类名}`来使用。同时，`:local`默认可以不写，这样，默认在样式表中定义的类名，都是被模块化的类名
+  + `:global()`包裹的类名，是全局生效的，不会被`css-modules`控制，定义的类名是什么，就是使用定义的类名`className='类名'`
+- 注意：只有`.title`这样的类样式选择器，才会被模块化控制，类似于`body`这样的标签选择器，不会被模块化控制
+## 在项目中为scss或less文件启用模块化
+如果在引用某个包的时候，这个包被安装到了node_modules目录中，则可以省略node_modules这一层目录，直接以包名开始引入自己的模块或样式表
+``` webpack.config.js
+//打包处理字体文件的loader
+//安装url-loader和file-loader(url-loader依赖该包)
+{test:/\.ttf|woff|woff2|eot|svg$/,use:'url-loader'}
+```
+## 在项目中启用模块化并同时使用bootstrap
+1.把自己的样式表定义为.scss文件
+2.第三方的样式表还是以.css结尾
+3.我们只需要为自己的.scss文件启用模块化即可
+4.运行`npm i sass-loader node-sass -D`安装能够解析scss文件的loader
+5.webpack.config.js中配置rules `{test:/\.scss$/,use:['style-loader','css-loader','sass-loader']}`
+
+## React中绑定事件的注意点
+1.事件的名称都是React提供的，因此名称的首字母必须大写`onClick`、`onMouseOver`
+2.为事件提供的处理函数，必须是如下格式
+  `onClick={ function }`
+3.用的最多的事件绑定形式为：
+  ``` js
+  <button onClick={ () => this.show('传参') }>按钮</button>
+  //事件的处理函数，需要定义为一个箭头函数，然后赋值给函数名称
+  show = (arg1) => {
+  	console.log('show方法'+arg1)
+  }
+  ```
+4.在React中，如果想要修改state中的数据，不应该使用`this.state.xxx=值`。应该调用React提供的`this.setState({})`修改状态值
+5.在setState中，只会把对应的state状态值更新，而不会覆盖其他的state状态
+6.this.setState方法的执行是异步的。如果再调用完this.setState之后，又想拿到最新的state值，需要使用`this.setState({},callback)`
+
+## React中绑定文本框与state中的值（单向数据流）
+vscode中`//#region  //#endregion`折叠代码块区域
+1.在Vue中，默认提供了v-model指令，可以很方便的实现数据的双向绑定
+2.在React中，默认只是单向数据流，即只能把state上的数据绑定到页面，无法把页面上的数据的变化自动同步回state；如果需要把页面上的数据的变化保存到state中，则需要程序员手动监听onChange事件，拿到最新的数据，手动调用this.setState({})更改回去
+如果我们只是把文本框的value属性绑定到了state状态，但是如果不提供onChange处理函数的话，得到的文本框将会是一个只读文本框。
+当为文本框绑定value值以后，要么同时提供一个readOnly属性，要么提供一个onChange处理函数，如下：
+``` jsx
+<input type="text" style={ {width:'100%'} } value={ this.state.msg } onChange={ (e)=> this.txtChanged(e) re f="mytxt" }
+
+//每当文本框的内容变化了，必然会调用txtChanged
+txtChanged = (e) => {
+	//在onChange事件中，获取文本框的值。有两种方案
+	//方案1:通过事件参数e来获取
+	console.log(e.target.value)
+	//方案2:通过ref获取DOM元素引用
+	this.setState({
+		msg:this.refs.mytxt.value
+	})
+}
+```
+## 使用ref获取DOM元素引用
+和Vue中差不多，vue为页面上的元素提供了ref的属性，如果想要获取元素引用，则需要使用this.$refs.引用名称
+在React中，也有ref，如果要获取元素的引用：this.refs.引用名称
+## 组件的生命周期
+- 生命周期的概念：每个组件的实例，从创建-运行-销毁，在这个过程中会出现一系列事件，这些事件就叫做组件的生命周期函数
+- React组件生命周期分为三部分：
+  + 组件创建阶段：特点：一辈子只执行一次
+    * componentWillMount
+    * render
+    * componentDidMount
+  + 组件运行阶段：按需，根据props属性或state状态的改变，有选择性的执行0到多次
+    * componentWillReceiveProps
+    * shouldComponentUpdate
+    * componentWillUpdate
+    * render
+    * componentDidUpdate
+  + 组件销毁阶段：一辈子只执行一次
+    * componentWillUnmount
+
+  
+
 
 
 
