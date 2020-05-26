@@ -1,6 +1,6 @@
 ---
 categories:
- - [JavaScript]
+ - [JavaScript,notes,经典实例]
 tags:
  - JavaScript
 ---
