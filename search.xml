@@ -15,6 +15,10 @@
           
           <category> {{ cate.name }} </category>
           
+          <category> {{ cate.name }} </category>
+          
+          <category> {{ cate.name }} </category>
+          
       </categories>
       
       
