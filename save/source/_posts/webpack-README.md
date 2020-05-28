@@ -381,3 +381,17 @@ webpack提供了**友好的模块化支持**，以及**代码压缩混淆**、**
 }
 ```
 
+## webpack打包vue项目之后如何启动&注意事项
+
+前端代码没有服务器可以部署到express服务器上运行
+1.执行：npm run build，打包后生成dist文件夹
+2.安装express-generator生成器。执行`npm install express-generator -g`进行安装
+3.创建一个express项目。执行`express expressDemo`(expressDemo是项目名)
+4.进入expressDemo目录，安装项目依赖
+  ``` shell
+  cd expressDemo
+  npm install
+  ```
+5.把dist目录下的所有文件复制到express项目的public文件夹下
+6.运行`npm start`启动expressDemo
+7.打开浏览器，输入`http://localhost:3000`即可
